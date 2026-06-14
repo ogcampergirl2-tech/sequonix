@@ -172,7 +172,7 @@
 
   /* Momentum smooth scroll */
   if (window.Lenis && !reduced) {
-    const lenis = new window.Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.5 });
+    const lenis = new window.Lenis({ duration: 0.9, smoothWheel: true, touchMultiplier: 1.5 });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
     // Route in-page anchor links through Lenis for smooth travel

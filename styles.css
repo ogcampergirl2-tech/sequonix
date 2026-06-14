@@ -64,7 +64,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(72px);
   opacity: 0.5;
   will-change: transform;
 }
@@ -73,9 +73,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .orb--2 { width: 620px; height: 620px; background: radial-gradient(circle, #b8400a, transparent 70%); top: 8%; right: -220px; animation: drift2 34s ease-in-out infinite; }
 .orb--3 { width: 480px; height: 480px; background: radial-gradient(circle, #ff8a55, transparent 70%); bottom: -180px; left: 28%; opacity: 0.28; animation: drift3 40s ease-in-out infinite; }
 .orb--4 { width: 380px; height: 380px; background: radial-gradient(circle, #ff6a2b, transparent 70%); top: 45%; left: 8%; opacity: 0.2; animation: drift1 46s ease-in-out infinite reverse; }
-@keyframes drift1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(80px, 60px) scale(1.1); } }
-@keyframes drift2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-90px, 50px) scale(1.08); } }
-@keyframes drift3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(70px, -50px) scale(1.12); } }
+@keyframes drift1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(70px, 50px); } }
+@keyframes drift2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-80px, 40px); } }
+@keyframes drift3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(60px, -45px); } }
 
 /* ---------- Scroll progress ---------- */
 .scroll-progress {
@@ -142,7 +142,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   max-width: 100%; transition: background 0.3s var(--ease), border-color 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
   border-bottom: 1px solid transparent;
 }
-.nav--scrolled { background: rgba(7, 7, 11, 0.72); backdrop-filter: blur(14px); border-bottom-color: var(--border); }
+.nav--scrolled { background: rgba(7, 7, 11, 0.82); backdrop-filter: blur(10px); border-bottom-color: var(--border); }
 .nav__brand { display: inline-flex; align-items: center; }
 .logo {
   display: inline-flex;
