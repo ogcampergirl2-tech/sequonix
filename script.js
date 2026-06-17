@@ -1,14 +1,12 @@
 /* ============================================================
-   Sequonix — interactions
+   Sequonix : interactions
    IntersectionObserver reveals, count-up KPIs, sticky nav,
-   subtle orb parallax, mobile menu, and accessible newsletter
-   form validation (skill: inline-validation, error-clarity,
-   focus-management, aria-live errors).
+   mobile menu, work carousel, accessible newsletter validation.
+   No scroll-jacking, no decorative animation libraries.
    ============================================================ */
 (function () {
   'use strict';
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* ---------- Reveal on scroll ---------- */
@@ -21,7 +19,7 @@
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
   );
   document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
@@ -32,7 +30,7 @@
         if (!entry.isIntersecting) return;
         const el = entry.target;
         const target = parseInt(el.dataset.count, 10);
-        const dur = 1400;
+        const dur = 1300;
         const start = performance.now();
         function tick(now) {
           const p = Math.min((now - start) / dur, 1);
@@ -47,17 +45,11 @@
   );
   document.querySelectorAll('.kpi__num').forEach((el) => countObserver.observe(el));
 
-  /* ---------- Sticky nav + scroll progress + orb parallax ---------- */
+  /* ---------- Sticky nav state ---------- */
   const nav = document.getElementById('nav');
-  const progress = document.getElementById('scrollProgress');
-  const orbs = Array.from(document.querySelectorAll('.orb'));
   let ticking = false;
-
   function onScroll() {
-    const y = window.scrollY;
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.transform = `scaleX(${docH > 0 ? y / docH : 0})`;
-    nav.classList.toggle('nav--scrolled', y > 24);
+    nav.classList.toggle('nav--scrolled', window.scrollY > 24);
     ticking = false;
   }
   window.addEventListener(
@@ -81,7 +73,7 @@
     })
   );
 
-  /* ---------- Selected-work carousel (ported OfferCarousel scroll) ---------- */
+  /* ---------- Selected-work carousel ---------- */
   const track = document.getElementById('workTrack');
   if (track) {
     const scrollByAmount = (dir) => {
@@ -99,13 +91,6 @@
   const success = document.getElementById('subscribeSuccess');
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  function validate() {
-    const val = email.value.trim();
-    if (!val) { setError('Please enter your email address.'); return false; }
-    if (!emailRe.test(val)) { setError('That doesn’t look like a valid email — check for typos.'); return false; }
-    clearError();
-    return true;
-  }
   function setError(msg) {
     error.textContent = msg;
     email.classList.add('invalid');
@@ -116,105 +101,33 @@
     email.classList.remove('invalid');
     email.removeAttribute('aria-invalid');
   }
+  function validate() {
+    const val = email.value.trim();
+    if (!val) { setError('Please enter your email address.'); return false; }
+    if (!emailRe.test(val)) { setError('That does not look like a valid email. Check for typos.'); return false; }
+    clearError();
+    return true;
+  }
 
-  // Validate on blur (not on every keystroke) per UX guidance
+  // Validate on blur, clear the error as the user fixes it.
   email.addEventListener('blur', () => { if (email.value.trim()) validate(); });
   email.addEventListener('input', () => { if (email.classList.contains('invalid')) clearError(); });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validate()) { email.focus(); return; }
-    // Front-end only demo: no backend wired yet.
+    // Front-end demo: no mailer connected yet.
     success.hidden = false;
-    form.querySelector('.subscribe__btn').textContent = 'Subscribed ✓';
+    form.querySelector('.subscribe__btn').textContent = 'Subscribed';
     email.value = '';
   });
 
-  /* ---------- Sequenced reveals (journey choreography) ---------- */
+  /* ---------- Sequenced reveal delays ---------- */
   ['.services', '.industries', '.about__pillars', '.partners', '.news__issues'].forEach((sel) => {
     const parent = document.querySelector(sel);
     if (!parent) return;
     Array.from(parent.querySelectorAll('.reveal')).forEach((el, i) => {
-      el.style.transitionDelay = (i * 0.08).toFixed(2) + 's';
+      el.style.transitionDelay = (i * 0.07).toFixed(2) + 's';
     });
   });
-
-  /* ---------- Waypoint dot-nav active state ---------- */
-  const waypoints = document.querySelectorAll('.waypoints a');
-  if (waypoints.length) {
-    const map = {};
-    waypoints.forEach((a) => { map[a.getAttribute('href').slice(1)] = a; });
-    const targets = Object.keys(map).map((id) => document.getElementById(id)).filter(Boolean);
-    const wpObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            waypoints.forEach((a) => a.classList.remove('active'));
-            if (map[e.target.id]) map[e.target.id].classList.add('active');
-          }
-        });
-      },
-      { threshold: 0.25, rootMargin: '-25% 0px -45% 0px' }
-    );
-    targets.forEach((t) => wpObserver.observe(t));
-  }
-})();
-
-/* ============================================================
-   Kinetic experience layer
-   - Lenis momentum smooth-scroll (via CDN)
-   - Headline rise-into-view mask reveal
-   The background is a soft animated gradient mesh (pure CSS).
-   ============================================================ */
-(function () {
-  'use strict';
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* Momentum smooth scroll */
-  if (window.Lenis && !reduced) {
-    const lenis = new window.Lenis({ duration: 0.9, smoothWheel: true, touchMultiplier: 1.5 });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-    // Route in-page anchor links through Lenis for smooth travel
-    document.querySelectorAll('a[href^="#"]').forEach((a) => {
-      const href = a.getAttribute('href');
-      if (href.length > 1) {
-        a.addEventListener('click', (e) => {
-          const el = document.querySelector(href);
-          if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -8 }); }
-        });
-      }
-    });
-  }
-
-  /* Headline mask reveal: text rises into view from a clipped line */
-  function applyMask(selector) {
-    document.querySelectorAll(selector).forEach((h) => {
-      if (h.dataset.masked) return;
-      h.dataset.masked = '1';
-      const inner = document.createElement('span');
-      inner.className = 'mask__i';
-      inner.innerHTML = h.innerHTML;
-      h.innerHTML = '';
-      h.classList.add('mask');
-      h.appendChild(inner);
-    });
-  }
-  applyMask('.hero__title');
-  applyMask('.section-head h2');
-
-  const masks = document.querySelectorAll('.mask');
-  if (reduced) {
-    masks.forEach((m) => m.classList.add('in'));
-  } else {
-    const maskObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add('in'); maskObserver.unobserve(e.target); }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    masks.forEach((m) => maskObserver.observe(m));
-  }
 })();
