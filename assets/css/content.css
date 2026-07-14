@@ -151,6 +151,12 @@
   display: flex; flex-direction: column; justify-content: center;
   transition: background .3s var(--ease);
 }
+/* Square cells, but only where the column is wide enough to hold the copy in one:
+   a square's height comes from its width, so on a narrow column the text would
+   overflow. Below 1100px they size to content instead. */
+@media (min-width: 1100px) {
+  .pillar { aspect-ratio: 1 / 1; }
+}
 .pillar:hover { background: var(--panel); }
 .pillar .label { display: block; margin-bottom: .9rem; font-size: .78rem; }
 .pillar h3 { font-size: 1.3rem; margin-bottom: .6rem; }
