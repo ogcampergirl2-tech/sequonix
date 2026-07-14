@@ -69,6 +69,10 @@
 
 .vx-hero-content h1 .accent { color: var(--emerald-bright); }
 
+/* the sub is two deliberate lines — the design's 30rem cap re-wrapped them into
+   five and ate the hero. widen to match the h1 above it so each line holds. */
+.vx-hero-content .sub { max-width: 54rem; }
+
 .hero-btns { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
 
 /* ghost twin of .btn-white, for the hero's secondary action */
