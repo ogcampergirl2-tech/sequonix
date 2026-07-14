@@ -210,9 +210,9 @@
   transition: background .3s var(--ease);
 }
 .ind:hover { background: var(--panel); }
-.ind h3 { font-size: 1.06rem; margin-bottom: .5rem; transition: color .3s var(--ease); }
+.ind h3 { font-size: 1.25rem; margin-bottom: .55rem; transition: color .3s var(--ease); }
 .ind:hover h3 { color: var(--emerald-bright); }
-.ind p { font-size: var(--step--1); color: var(--ink-faint); line-height: 1.5; }
+.ind p { font-size: var(--step-0); color: var(--ink-soft); line-height: 1.6; }
 
 /* ============================================================
    SELECTED WORK — carousel + animated product mockups
@@ -225,7 +225,9 @@
 .offer-track::-webkit-scrollbar { display: none; }
 
 .offer-card {
-  position: relative; height: 400px; overflow: hidden;
+  /* taller than the original 400px: the body is a fixed 52% of this, and the
+     bigger description needs the room or it clips */
+  position: relative; height: 450px; overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--panel);
@@ -352,10 +354,10 @@
   text-transform: uppercase; color: var(--muted);
 }
 .offer-card__tag svg { width: 14px; height: 14px; color: var(--emerald); }
-.offer-card__title { font-size: 1.2rem; color: var(--ink); transition: color .3s var(--ease); }
+.offer-card__title { font-size: 1.3rem; color: var(--ink); transition: color .3s var(--ease); }
 .offer-card:hover .offer-card__title { color: var(--emerald-bright); }
 .offer-card__desc {
-  font-size: .84rem; color: var(--ink-faint); line-height: 1.45;
+  font-size: var(--step-0); color: var(--ink-soft); line-height: 1.5;
   display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3;
   -webkit-box-orient: vertical; overflow: hidden;
 }
@@ -423,11 +425,11 @@
 }
 .tier--featured .tier__badge { border-color: var(--emerald); color: var(--emerald-bright); }
 .tier h3 { font-size: var(--step-2); }
-.tier p { font-size: var(--step--1); line-height: 1.6; }
-.tier__list { display: flex; flex-direction: column; gap: .65rem; margin: .3rem 0 .4rem; }
+.tier p { font-size: var(--step-0); color: var(--ink-soft); line-height: 1.6; }
+.tier__list { display: flex; flex-direction: column; gap: .7rem; margin: .3rem 0 .4rem; }
 .tier__list li {
   position: relative; padding-left: 1.5rem;
-  color: var(--ink-soft); font-size: var(--step--1);
+  color: var(--ink-soft); font-size: var(--step-0);
 }
 .tier__list li::before {
   content: ""; position: absolute; left: 0; top: .68em;
@@ -464,8 +466,8 @@
   font-family: var(--mono); font-size: .68rem;
   letter-spacing: .08em; text-transform: uppercase; color: var(--emerald-bright);
 }
-.issue h3 { font-size: 1.15rem; margin: .5rem 0 .35rem; }
-.issue p { font-size: var(--step--1); color: var(--ink-faint); }
+.issue h3 { font-size: 1.25rem; margin: .55rem 0 .4rem; }
+.issue p { font-size: var(--step-0); color: var(--ink-soft); line-height: 1.6; }
 
 .subscribe {
   position: sticky; top: 96px;
