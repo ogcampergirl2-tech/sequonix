@@ -1,5 +1,5 @@
 /* ============================================================
-   Sequonix landing — video hero + ported scroll motion system
+   Sequonix landing - video hero + ported scroll motion system
    ============================================================ */
 (function () {
   "use strict";
@@ -204,7 +204,7 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validate()) { email.focus(); return; }
-      /* front-end only — no mailer is wired up yet */
+      /* front-end only - no mailer is wired up yet */
       success.hidden = false;
       form.querySelector(".subscribe__btn").textContent = "Subscribed";
       email.value = "";
@@ -267,7 +267,7 @@
     /* ===== MANIFESTO word-by-word highlight ===== */
     var man = document.querySelector("[data-manifesto]");
     if (man) {
-      /* words lit in purple as the manifesto scrolls — must match the copy verbatim, punctuation included */
+      /* words lit in purple as the manifesto scrolls - must match the copy verbatim, punctuation included */
       var emphasis = ["vendor.", "partner,", "roadmap,", "risk,", "wins."];
       var words = man.textContent.trim().split(/\s+/);
       man.innerHTML = words.map(function (w) {

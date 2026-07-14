@@ -1,5 +1,5 @@
 /* ============================================================
-   SEQUONIX — merged content layer
+   SEQUONIX - merged content layer
    Every section carried over from the AI-native content site,
    restyled in the finalized black + purple design language.
    Loaded AFTER refresh.css and style.css so these win.
@@ -69,7 +69,7 @@
 
 .vx-hero-content h1 .accent { color: var(--emerald-bright); }
 
-/* the sub is two deliberate lines — the design's 30rem cap re-wrapped them into
+/* the sub is two deliberate lines - the design's 30rem cap re-wrapped them into
    five and ate the hero. widen to match the h1 above it so each line holds. */
 .vx-hero-content .sub { max-width: 54rem; }
 
@@ -118,7 +118,7 @@
    ABOUT
    ============================================================ */
 /* The 900px box sits to the RIGHT of the heading. It only fits there if the section
-   breaks out of the page's 1240px container — inside it, a 900px box would leave the
+   breaks out of the page's 1240px container - inside it, a 900px box would leave the
    text column ~190px, which is unreadable. So About (and only About) runs wider. */
 .container--wide { max-width: 1640px; }
 
@@ -158,7 +158,7 @@
 }
 /* Square cells only once the viewport is wide enough for the box to reach its full
    900px beside the text. Below that the box column shrinks, and forcing a square
-   would shrink the cells' height while the copy stays the same length — it would
+   would shrink the cells' height while the copy stays the same length - it would
    overflow. So they size to their content instead. */
 @media (min-width: 1400px) {
   .pillar { aspect-ratio: 1 / 1; }
@@ -169,7 +169,7 @@
 .pillar p { font-size: var(--step-0); color: var(--ink-soft); line-height: 1.6; }
 
 /* ============================================================
-   SERVICES — capability lists inside the pinned panels
+   SERVICES - capability lists inside the pinned panels
    ============================================================ */
 .hpanel { flex-basis: clamp(285px, 78vw, 430px); height: clamp(360px, 68vh, 540px); }
 .hpanel h3 { margin: auto 0 .55rem; }
@@ -215,7 +215,7 @@
 .ind p { font-size: var(--step-0); color: var(--ink-soft); line-height: 1.6; }
 
 /* ============================================================
-   SELECTED WORK — carousel + animated product mockups
+   SELECTED WORK - carousel + animated product mockups
    ============================================================ */
 .offer-carousel { position: relative; }
 .offer-track {
@@ -385,7 +385,7 @@
 .offer-card__arrow svg { width: 16px; height: 16px; }
 .offer-card:hover .offer-card__arrow { color: var(--emerald-bright); transform: translateX(3px); }
 
-/* carousel arrows — only needed once the track scrolls (mobile/tablet) */
+/* carousel arrows - only needed once the track scrolls (mobile/tablet) */
 .offer-nav {
   position: absolute; top: -3.9rem;
   width: 40px; height: 40px; border-radius: 50%;
@@ -438,12 +438,12 @@
 .tier__cta { align-self: flex-start; margin-top: auto; }
 
 /* ============================================================
-   RESULTS — 3-up stats
+   RESULTS - 3-up stats
    ============================================================ */
 .stats-strip.stats-3 { grid-template-columns: repeat(3, 1fr); }
 
 /* ============================================================
-   NEWSLETTER — The Sequonix Signal
+   NEWSLETTER - The Sequonix Signal
    ============================================================ */
 .news {
   display: grid; grid-template-columns: 1.25fr 1fr;
