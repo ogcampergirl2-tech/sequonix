@@ -117,18 +117,18 @@
 /* ============================================================
    ABOUT
    ============================================================ */
-/* Pillars sit beside the copy. The split is tilted toward them (0.8 / 1.2) to buy
-   the squares as much width as possible — a square's height comes from its width,
-   so the column width IS the cell size. Any wider and the text column stops
-   being readable. */
-.about {
+/* Copy runs two-up across the top (head | paragraphs), then the pillars drop below
+   it — freed from the text column, the squares can grow. Capped at 900px and
+   centred so they land at ~450px rather than the full-width 620px, which made the
+   section far too tall. Cell size IS the column width, so this cap is the dial. */
+.about__top {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(1.75rem, 4vw, 3.25rem);
   align-items: start;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
 }
-.about__col { display: flex; flex-direction: column; }
-.about__col .section-head { max-width: none; margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
+.about__top .section-head { max-width: none; margin-bottom: 0; }
 .about__lead { display: flex; flex-direction: column; gap: 1.15rem; }
 .about__lead p:first-child {
   font-family: "Clash Display", sans-serif;
@@ -146,21 +146,23 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  max-width: 900px;        /* the dial: 900 -> ~450px squares */
+  margin-inline: auto;
 }
 .pillar {
   background: var(--bone);
-  padding: clamp(1.6rem, 2.2vw, 2.1rem);
+  padding: clamp(1.8rem, 2.8vw, 2.6rem);
   display: flex; flex-direction: column; justify-content: center;
   transition: background .3s var(--ease);
 }
-/* Square cells. A square takes its height from its width, so on a narrow column the
-   copy would overflow — below 1100px they size to their content instead. */
-@media (min-width: 1100px) {
+/* Square cells. A square takes its height from its width, so on a narrow grid the
+   copy would overflow — below 900px they size to their content instead. */
+@media (min-width: 900px) {
   .pillar { aspect-ratio: 1 / 1; }
 }
 .pillar:hover { background: var(--panel); }
-.pillar .label { display: block; margin-bottom: .9rem; font-size: .78rem; }
-.pillar h3 { font-size: 1.3rem; margin-bottom: .6rem; }
+.pillar .label { display: block; margin-bottom: 1rem; font-size: .8rem; }
+.pillar h3 { font-size: var(--step-1); margin-bottom: .7rem; }
 .pillar p { font-size: var(--step-0); color: var(--ink-soft); line-height: 1.6; }
 
 /* ============================================================
@@ -499,7 +501,7 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 980px) {
-  .about { grid-template-columns: 1fr; }
+  .about__top { grid-template-columns: 1fr; }
   .industries { grid-template-columns: repeat(2, 1fr); }
   .partners, .news { grid-template-columns: 1fr; }
   .subscribe { position: static; }
