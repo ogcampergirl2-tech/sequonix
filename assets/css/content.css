@@ -117,12 +117,16 @@
 /* ============================================================
    ABOUT
    ============================================================ */
+/* the heading lives INSIDE the left column, so the pillars start at the top of
+   the section instead of below the head — that top-right gap was the dead space */
 .about {
   display: grid;
   grid-template-columns: 1fr 1.05fr;
   gap: clamp(1.75rem, 4vw, 3.25rem);
-  align-items: start;
+  align-items: stretch;
 }
+.about__col { display: flex; flex-direction: column; }
+.about__col .section-head { max-width: none; margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
 .about__lead { display: flex; flex-direction: column; gap: 1.15rem; }
 .about__lead p:first-child {
   font-family: "Clash Display", sans-serif;
@@ -136,6 +140,7 @@
 /* hairline grid: the container's background IS the 1px rules */
 .about__pillars {
   display: grid; grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;          /* both rows share the column height evenly */
   gap: 1px; background: var(--line);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -143,7 +148,8 @@
 }
 .pillar {
   background: var(--bone);
-  padding: 1.6rem 1.5rem;
+  padding: 1.9rem 1.6rem;
+  display: flex; flex-direction: column; justify-content: center;
   transition: background .3s var(--ease);
 }
 .pillar:hover { background: var(--panel); }
@@ -501,6 +507,7 @@
 }
 @media (max-width: 520px) {
   .about__pillars, .industries { grid-template-columns: 1fr; }
+  .about__pillars { grid-template-rows: auto; }   /* 4 stacked rows, each sized to its own content */
   .hero-status { font-size: .62rem; }
 }
 
